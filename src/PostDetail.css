@@ -1,0 +1,62 @@
+.main-comments{
+    display: flex;
+    padding: 1rem;
+}
+.add-new-comment-button{
+    height: 32px;
+    width: 100%;
+    cursor: pointer;
+    font-size: large;
+    color: aliceblue;
+    background-color: #007bff;
+    border-color: transparent;
+    border-radius: 6px;
+}
+.add-comment-button{
+    height: 32px;
+    width: 100%;
+    cursor: pointer;
+    background-color: #007bff;
+    border-color: transparent;
+    border-radius: 6px;
+    font-size: large;
+    color: aliceblue;
+    margin-top: 1rem;
+}
+.edit-delete-button{
+    display: flex;
+    width: 100%;
+    gap: 8px;
+    align-items: center;
+}
+.add-comment-input{
+    height: 32px;
+    width: 100%;
+    border-radius: 6px;
+    padding-left: 1,5rem;
+    padding-right: 1,5rem;
+}
+.detail-screen{
+    padding: 1rem;
+}
+.comment-container{
+    width: 425px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+.form-comment-container{
+    display: flex;
+    flex-direction: column;
+}
+.comment-label{
+    display: flex;
+    flex-direction: column;
+}
+.comment-card-content{
+    margin-top: 0;
+    margin-bottom: 0;
+    height: 110px;
+}
