@@ -12,6 +12,7 @@ function PostDetail() {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [comments, setComments] = useState([]);
+  console.log("comment", comments);
   const [editCommentId, setEditCommentId] = useState(null);
   const [editedCommentBody, setEditedCommentBody] = useState("");
   const [showInputs, setShowInputs] = useState(false);
@@ -66,10 +67,10 @@ function PostDetail() {
     }
     const newComment = {
       id: Math.floor(Math.random() * 1000),
-      title: title,
+      name: title,
       body: body,
     };
-    setComments([...comments, newComment]);
+    setComments([newComment, ...comments]);
     setTitle("");
     setBody("");
     setShowInputs(false);
@@ -133,12 +134,12 @@ function PostDetail() {
               {comments.map((comment) => (
                 <Grid xs={4} key={comment.id} className="card">
                   <Card
-                    sx={{ minHeight: "200px", marginBottom: "1,5rem" }}
+                    sx={{ minHeight: "150px", marginBottom: "1,5rem" }}
                     variant="outlined"
                   >
                     <CardContent>
                       <p className="comment-card-content">
-                        <strong>{comment.name}:</strong> {comment.body}
+                        <strong>{comment.name}:</strong>
                       </p>
 
                       {editCommentId === comment.id ? (
