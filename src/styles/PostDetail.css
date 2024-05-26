@@ -11,6 +11,10 @@
     background-color: #007bff;
     border-color: transparent;
     border-radius: 6px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .add-comment-button{
     height: 32px;
@@ -46,6 +50,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    align-items: end;
   }
 .form-comment-container{
     display: flex;
@@ -58,4 +63,14 @@
 .comment-card-content{
     margin-top: 0;
     margin-bottom: 0;
+}
+.button-title{
+    display: flex;
+    justify-content:space-between;
+    gap: 50px;
+    
+    
+}
+.add-new-comment-button{
+    width: 16rem;
 }

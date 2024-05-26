@@ -1,9 +1,10 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import { Card, CardContent, Grid, Chip, Button } from "@mui/material";
+import { Grid, CardContent, Chip, Button } from "@mui/material";
+import CardComponents from "../components/CardComponents";
+import "../styles/PostList.css";
+import { useNavigate } from "react-router-dom";
 import RedoIcon from "@mui/icons-material/Redo";
-import "./PostList.css";
 
 const PostList = () => {
   const navigate = useNavigate();
@@ -33,41 +34,88 @@ const PostList = () => {
       post.body.toLowerCase().includes(searchTerm.toLowerCase())
     );
   };
-
-  const getUserStatus = (userId) => {
-    if (userId % 6 === 0) {
+  const getUserStatus = (ids) => {
+    if (ids % 6 === 0) {
       return "Platinum";
-    } else if (userId % 3 === 0) {
+    } else if (ids % 3 === 0) {
       return "Gold";
-    } else if (userId % 2 === 0) {
+    } else if (ids % 2 === 0) {
       return "Silver";
     } else {
       return "Diomand";
     }
   };
 
-  const getUserStatusColor = (userId) => {
-    if (userId % 6 === 0) {
+  const getUserStatusColor = (ids) => {
+    if (ids % 6 === 0) {
       return "#87828c";
-    } else if (userId % 3 === 0) {
+    } else if (ids % 3 === 0) {
       return "#e9d700";
-    } else if (userId % 2 === 0) {
+    } else if (ids % 2 === 0) {
       return "#d2cfd6";
     } else {
       return "#993fff";
     }
   };
 
-  const getUserStatusImage = (userId) => {
-    if (userId % 6 === 0) {
+  const getUserStatusImage = (ids) => {
+    if (ids % 6 === 0) {
       return "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbq9kozFHiwbt2acqlRMPTwjVb_PgUcRe8S6Gxa6QjDA&s";
-    } else if (userId % 3 === 0) {
+    } else if (ids % 3 === 0) {
       return "https://previews.123rf.com/images/liliwhite/liliwhite1502/liliwhite150200027/37140287-alt%C4%B1n-antika-desenli-alt%C4%B1n-%C3%BCye-rozeti.jpg";
-    } else if (userId % 2 === 0) {
+    } else if (ids % 2 === 0) {
       return "https://previews.123rf.com/images/valentint/valentint1609/valentint160900095/61961558-silver-%C3%BCye-simgesi-beyaz-zemin-%C3%BCzerine-internet-d%C3%BC%C4%9Fmesine-bas%C4%B1n.jpg";
     } else {
       return "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgld39vbZ_eIJJH0yRucjGbKdSq0O8ABI6M30BqlFGug&s";
     }
+  };
+  const PostListCardContent = ({ title, body, id, userId }) => {
+    return (
+      <CardContent>
+        <div className="card-content">
+          <h3
+            className={`${
+              viewMode === "list"
+                ? "card-content-title-list"
+                : "card-content-title"
+            }`}
+          >
+            {title}
+          </h3>
+          <p
+            className={`${
+              viewMode === "list"
+                ? "card-content-body-list"
+                : "card-content-body"
+            }`}
+          >
+            {body}
+          </p>
+          <div className="card-content-badge">
+            <Chip
+              sx={{ background: getUserStatusColor(userId) }}
+              label={getUserStatus(userId)}
+            />
+            <img
+              onClick={() => {
+                window.location.href = getUserStatusImage(userId);
+              }}
+              height={48}
+              width={48}
+              src={getUserStatusImage(userId)}
+              alt="User Status"
+            />
+            <Button
+              onClick={() => navigate(`/posts/${id}`)}
+              variant="contained"
+              endIcon={<RedoIcon />}
+            >
+              View Comments
+            </Button>
+          </div>
+        </div>
+      </CardContent>
+    );
   };
 
   return (
@@ -103,61 +151,17 @@ const PostList = () => {
                 key={post.id}
                 className="card"
               >
-                <Card
-                  sx={{
-                    height: viewMode === "list" ? "200px" : "350px",
-                    marginBottom: "1,5rem",
-                  }}
-                  variant="outlined"
-                >
-                  <CardContent>
-                    <div className="card-content">
-                      <h3
-                        className={`${
-                          viewMode === "list"
-                            ? "card-content-title-list"
-                            : "card-content-title"
-                        }`}
-                      >
-                        {post.title}
-                      </h3>
-                      <p
-                        className={`${
-                          viewMode === "list"
-                            ? "card-content-body-list"
-                            : "card-content-body"
-                        }`}
-                      >
-                        {post.body}
-                      </p>
-                      <div className="card-content-badge">
-                        {" "}
-                        <Chip
-                          sx={{ background: getUserStatusColor(post.userId) }}
-                          label={getUserStatus(post.userId)}
-                        />
-                        <img
-                          onClick={() => {
-                            window.location.href = getUserStatusImage(
-                              post.userId
-                            );
-                          }}
-                          height={48}
-                          width={48}
-                          src={getUserStatusImage(post.userId)}
-                          alt="User Status"
-                        />
-                        <Button
-                          onClick={() => navigate(`/posts/${post.id}`)}
-                          variant="contained"
-                          endIcon={<RedoIcon />}
-                        >
-                          View Comments
-                        </Button>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                <CardComponents
+                  viewMode={viewMode}
+                  content={
+                    <PostListCardContent
+                      title={post.title}
+                      body={post.body}
+                      userId={post.userId}
+                      id={post.id}
+                    />
+                  }
+                />
               </Grid>
             ))}
           </Grid>

@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
-import "./Login.css";
+import React, { useState } from "react";
+import "../styles/Login.css";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
@@ -15,10 +14,7 @@ const Login = () => {
       setError("");
       alert("Giriş başarılı!");
       handleNavigateToPosts();
-      setIsLoggedIn(true);
-      // Burada başarılı giriş sonrası yapılacak işlemler olacak.
     } else {
-      console.log("ass");
       setError("Kullanıcı adı veya şifre hatalı!");
     }
   };
@@ -29,6 +25,7 @@ const Login = () => {
 
   return (
     <div className="main">
+      <div className="login-image-area"></div>
       <div className="login-screen">
         <div className="login-container">
           <h2>Login</h2>

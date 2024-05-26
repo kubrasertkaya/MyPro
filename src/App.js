@@ -1,7 +1,7 @@
-import Login from "./Login";
+import Login from "./pages/Login";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import PostList from "./PostList";
-import PostDetail from "./PostDetail";
+import PostList from "./pages/PostList";
+import PostDetail from "./pages/PostDetail";
 
 function App() {
   return (
