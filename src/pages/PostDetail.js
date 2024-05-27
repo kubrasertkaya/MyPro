@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { Button, CardContent, Grid } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
 import CardComponents from "../components/CardComponents";
 import "../styles/PostDetail.css";
 
@@ -78,6 +79,9 @@ function PostDetail() {
 
   const handleButtonClick = () => {
     setShowInputs(true);
+  };
+  const handleExitButtonClick = () => {
+    setShowInputs(false);
   };
 
   const PostDetailCardContent = ({ name, id, body }) => {
@@ -169,7 +173,17 @@ function PostDetail() {
         <div>
           {showInputs && (
             <div className="comment-container" id="bottomRef">
-              <h2>Add New Comment</h2>
+              <div className="exit-title">
+                <h2>Add New Comment</h2>
+                <Button
+                  className="exit-button"
+                  onClick={handleExitButtonClick}
+                  variant="outlined"
+                  startIcon={<CancelPresentationIcon />}
+                >
+                  Exit
+                </Button>
+              </div>
               <div className="form-comment-container">
                 <label className="comment-label">Title:</label>
                 <input
@@ -187,9 +201,11 @@ function PostDetail() {
                   onChange={(e) => setBody(e.target.value)}
                 ></textarea>
               </div>
+
               <button className="add-comment-button" onClick={handleAddComment}>
                 Add Comment
               </button>
+
               {error && <p style={{ color: "red" }}>{error}</p>}
             </div>
           )}

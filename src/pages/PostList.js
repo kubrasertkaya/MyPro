@@ -24,8 +24,8 @@ const PostList = () => {
       });
   }, []);
 
-  const changeViewMode = (mode) => {
-    setViewMode(mode);
+  const changeViewMode = () => {
+    setViewMode((prevMode) => (prevMode === "list" ? "card" : "list"));
   };
 
   const filterPosts = (post) => {
@@ -128,17 +128,8 @@ const PostList = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <button
-          className="postList-search-button"
-          onClick={() => changeViewMode("list")}
-        >
-          List View
-        </button>
-        <button
-          className="postList-search-button"
-          onClick={() => changeViewMode("card")}
-        >
-          Card View
+        <button className="postList-search-button" onClick={changeViewMode}>
+          {viewMode === "list" ? "Card View" : "List View"}
         </button>
       </div>
       <div>
