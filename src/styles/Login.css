@@ -3,11 +3,13 @@
 
 
 .login-container {
-  background-color: #8d9195;
+  background-color: #b0b2b4;
     width: 425px;
     padding: 20px;
     position: relative;
     margin-right: 500px;
+    border-radius: 10px;
+    
   }
   
   .login-container h2 {
